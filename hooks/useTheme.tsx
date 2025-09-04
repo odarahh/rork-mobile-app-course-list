@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { ThemeMode } from '@/types/course';
 
 export const useTheme = () => {
   const [theme, setTheme] = useState<ThemeMode>('dark');
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => {
+      const newTheme = prev === 'dark' ? 'light' : 'dark';
+      console.log('Theme changed to:', newTheme);
+      return newTheme;
+    });
+  }, []);
 
   const colors = {
     dark: {

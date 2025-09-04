@@ -26,17 +26,21 @@ export const CourseCard: React.FC<CourseCardProps> = ({
   onLessonShare,
 
 }) => {
-  const { colors } = useTheme();
+  const { colors, theme } = useTheme();
+  
+  console.log('CourseCard theme:', theme, 'cardBackground:', colors.cardBackground);
 
   return (
-    <View style={[
-      styles.container, 
-      { 
-        backgroundColor: colors.cardBackground,
-        shadowColor: colors.shadow,
-        shadowOpacity: colors.shadowOpacity,
-      }
-    ]}>
+    <View 
+      key={`course-${course.id}-${theme}`}
+      style={[
+        styles.container, 
+        { 
+          backgroundColor: colors.cardBackground,
+          shadowColor: colors.shadow,
+          shadowOpacity: colors.shadowOpacity,
+        }
+      ]}>
       <View style={styles.header}>
         <Text style={[styles.moduleLabel, { color: colors.textSecondary }]}>
           Trilha {course.id}
