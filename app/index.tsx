@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import { ArrowLeft, Sun, Moon } from 'lucide-react-native';
+import { ArrowLeft, Sun, Moon, Menu } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { Course, Lesson } from '@/types/course';
 import { useTheme } from '@/hooks/useTheme';
@@ -115,16 +115,25 @@ export default function CoursesScreen() {
           Meus Cursos
         </Text>
         
-        <TouchableOpacity
-          style={styles.themeButton}
-          onPress={toggleTheme}
-        >
-          {theme === 'dark' ? (
-            <Sun size={24} color={colors.text} />
-          ) : (
-            <Moon size={24} color={colors.text} />
-          )}
-        </TouchableOpacity>
+        <View style={styles.rightActions}>
+          <TouchableOpacity
+            style={styles.menuButton}
+            onPress={() => console.log('Menu pressed')}
+          >
+            <Menu size={24} color={colors.text} />
+          </TouchableOpacity>
+          
+          <TouchableOpacity
+            style={styles.themeButton}
+            onPress={toggleTheme}
+          >
+            {theme === 'dark' ? (
+              <Sun size={24} color={colors.text} />
+            ) : (
+              <Moon size={24} color={colors.text} />
+            )}
+          </TouchableOpacity>
+        </View>
       </View>
 
       <FlatList
@@ -159,6 +168,14 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     marginHorizontal: 16,
+  },
+  rightActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  menuButton: {
+    padding: 8,
+    marginRight: 8,
   },
   themeButton: {
     padding: 8,

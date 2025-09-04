@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { CheckCircle, Clock, Heart, Share2, ChevronRight } from 'lucide-react-native';
+import { CheckCircle, Clock, Heart, Share2, MoreHorizontal } from 'lucide-react-native';
 import { Lesson } from '@/types/course';
 import { useTheme } from '@/hooks/useTheme';
 
@@ -22,18 +22,30 @@ export const LessonItem: React.FC<LessonItemProps> = ({
   const getStatusIcon = () => {
     switch (lesson.status) {
       case 'completed':
-        return <CheckCircle size={20} color={colors.completed} />;
+        return (
+          <TouchableOpacity onPress={() => onPress(lesson.id)}>
+            <CheckCircle size={20} color={colors.completed} />
+          </TouchableOpacity>
+        );
       case 'in-progress':
-        return <Clock size={20} color={colors.inProgress} />;
+        return (
+          <TouchableOpacity onPress={() => onPress(lesson.id)}>
+            <Clock size={20} color={colors.inProgress} />
+          </TouchableOpacity>
+        );
       default:
-        return <View style={[styles.notStartedIcon, { borderColor: colors.notStarted }]} />;
+        return (
+          <TouchableOpacity onPress={() => onPress(lesson.id)}>
+            <View style={[styles.notStartedIcon, { borderColor: colors.notStarted }]} />
+          </TouchableOpacity>
+        );
     }
   };
 
 
 
   return (
-    <TouchableOpacity
+    <View
       style={[
         styles.container, 
         { 
@@ -43,8 +55,6 @@ export const LessonItem: React.FC<LessonItemProps> = ({
           shadowOpacity: colors.shadowOpacity,
         }
       ]}
-      onPress={() => onPress(lesson.id)}
-      activeOpacity={0.7}
     >
       <View style={styles.leftSection}>
         {getStatusIcon()}
@@ -80,9 +90,14 @@ export const LessonItem: React.FC<LessonItemProps> = ({
           <Share2 size={16} color={colors.textSecondary} />
         </TouchableOpacity>
 
-        <ChevronRight size={16} color={colors.textSecondary} />
+        <TouchableOpacity
+          style={styles.actionButton}
+          onPress={() => onPress(lesson.id)}
+        >
+          <MoreHorizontal size={16} color={colors.textSecondary} />
+        </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
