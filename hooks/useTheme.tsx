@@ -41,6 +41,8 @@ export const useTheme = () => {
     }
   };
 
+  console.log('useTheme - Current theme:', theme, 'cardBackground:', colors[theme].cardBackground);
+
   return {
     theme,
     toggleTheme,

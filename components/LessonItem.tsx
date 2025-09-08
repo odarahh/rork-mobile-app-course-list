@@ -17,9 +17,7 @@ export const LessonItem: React.FC<LessonItemProps> = ({
   onShare,
   onPress,
 }) => {
-  const { colors, theme } = useTheme();
-  
-  console.log('LessonItem theme:', theme, 'cardBackground:', colors.cardBackground);
+  const { colors } = useTheme();
 
   const getStatusIcon = () => {
     switch (lesson.status) {
@@ -48,7 +46,6 @@ export const LessonItem: React.FC<LessonItemProps> = ({
 
   return (
     <View
-      key={`lesson-${lesson.id}-${theme}`}
       style={[
         styles.container, 
         { 
